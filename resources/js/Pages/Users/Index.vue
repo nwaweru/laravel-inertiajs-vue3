@@ -1,7 +1,7 @@
 <template>
     <Head title="Users" />
     <p v-if="can.createUser" class="text-end">
-        <Link href="/users/create" class="btn btn-primary">Create User</Link>
+        <Link :href="route('users.create')" class="btn btn-primary">Create User</Link>
     </p>
     <h1>Users</h1>
     <div class="row justify-content-center">
@@ -24,7 +24,7 @@
                 <td>{{ user.email }}</td>
                 <td :title="user.created_at_for_humans">{{ user.created_at }}</td>
                 <td>
-                    <Link v-if="user.can.edit" :href="`/users/${user.id}/edit`" class="text-decoration-none">Edit</Link>
+                    <Link v-if="user.can.edit" :href="route('users.edit', { id: `${user.id}`})" class="text-decoration-none">Edit</Link>
                 </td>
             </tr>
         </tbody>
@@ -34,12 +34,11 @@
 </template>
 
 <script>
-import { Link } from '@inertiajs/inertia-vue3';
 import Pagination from '@/Shared/Pagination.vue';
 import debounce from 'lodash/debounce';
 
 export default {
-    components: { Link, Pagination },
+    components: { Pagination },
 
     props: {
         users: Object,

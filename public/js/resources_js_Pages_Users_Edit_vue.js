@@ -25,7 +25,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      this.form.patch('/users/' + this.user.id);
+      this.form.patch(route('users.update', {
+        id: this.user.id
+      }));
     }
   }
 });

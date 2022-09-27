@@ -23,7 +23,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      this.form.post('/users');
+      this.form.post(route('users.store'));
     }
   }
 });
