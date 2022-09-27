@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -57,7 +58,7 @@ class UserController extends Controller
 
         User::create($validData);
 
-        return redirect('/users');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -71,27 +72,35 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $this->authorize('update', $user);
+
+        return Inertia::render('Users/Edit', [
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+            ],
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $this->authorize('update', $user);
+
+        $validData = $request->validate([
+            'name' => 'required',
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+        ]);
+
+        $user->update($validData);
+
+        return redirect()->route('users.index', ['search' => $user->name]);
     }
 
     /**

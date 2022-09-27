@@ -52,7 +52,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return (bool) mt_rand(0, 1);
+        return $user->id === $model->id;
     }
 
     /**

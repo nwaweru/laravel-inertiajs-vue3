@@ -14,7 +14,7 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Home');
     });
 
-    Route::resource('users', UserController::class)->only('index', 'create', 'store');
+    Route::resource('users', UserController::class);
 
     Route::get('/settings', function () {
         return Inertia::render('Settings');
