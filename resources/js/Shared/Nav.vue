@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import NavLink from '../Shared/NavLink.vue';
+import NavLink from '@/Shared/NavLink.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
 export default {

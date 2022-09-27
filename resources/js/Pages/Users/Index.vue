@@ -35,7 +35,7 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
-import Pagination from '../../Shared/Pagination.vue';
+import Pagination from '@/Shared/Pagination.vue';
 import debounce from 'lodash/debounce';
 
 export default {
