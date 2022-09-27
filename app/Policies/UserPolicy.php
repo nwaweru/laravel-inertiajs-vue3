@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class UserPolicy
 {
@@ -52,7 +53,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->id === $model->id || $user->email = 'ndiranguwaweru@gmail.com';
+        return $user->id === $model->id || $user->email === 'ndiranguwaweru@gmail.com';
     }
 
     /**
